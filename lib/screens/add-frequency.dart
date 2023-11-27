@@ -6,12 +6,21 @@ class AddFrequency extends StatelessWidget {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-    return Container(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Select frequency',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Color(0xfffff2ff),
+        iconTheme: const IconThemeData(color: Color(0xfff43d4c)),
+      ),
+      body: Container(
       width: double.infinity,
       child: Container(
         // addfrequencyAK6 (14:43)
         width: double.infinity,
-        decoration: BoxDecoration (
+        decoration: const BoxDecoration (
           color: Color(0xfffff2ff),
         ),
         child: Column(
@@ -24,17 +33,6 @@ class AddFrequency extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    // arrowsarrowleftko6 (14:52)
-                    margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 16.43*fem),
-                    width: 19.18*fem,
-                    height: 18.14*fem,
-                    child: Image.asset(
-                      'assets/page-1/images/arrows-arrow-left-MuE.png',
-                      width: 19.18*fem,
-                      height: 18.14*fem,
-                    ),
-                  ),
                   Container(
                     // autogroupqge8s72 (H8xvwZPTfEdo4v5B7zQGe8)
                     margin: EdgeInsets.fromLTRB(11.31*fem, 0*fem, 0*fem, 8*fem),
@@ -78,7 +76,7 @@ class AddFrequency extends StatelessWidget {
             ),
             Container(
               // autogroup4bfj9Cx (H8xw6JdtTREUNGKw484BFJ)
-              padding: EdgeInsets.fromLTRB(80*fem, 78*fem, 40.25*fem, 204*fem),
+              padding: EdgeInsets.fromLTRB(80*fem, 78*fem, 40.25*fem, 5*fem),
               width: double.infinity,
               decoration: BoxDecoration (
                 color: Color(0xffffffff),
@@ -274,6 +272,6 @@ class AddFrequency extends StatelessWidget {
           ],
         ),
       ),
-          );
+          ),);
   }
 }
