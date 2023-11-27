@@ -118,7 +118,7 @@ class AddName extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(
                           0 * fem, 0 * fem, 39 * fem, 263 * fem),
                       child: Text(
-                        ' the name of the Med ',
+                        'type the name of the Med ',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16 * ffem,
