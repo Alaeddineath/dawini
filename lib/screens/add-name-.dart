@@ -113,6 +113,12 @@ class AddName extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Enter your text',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
                     Container(
                       // typethenameofthemedXEL (11:17)
                       margin: EdgeInsets.fromLTRB(
