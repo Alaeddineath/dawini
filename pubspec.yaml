@@ -1,0 +1,68 @@
+name: dawini
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  google_fonts: ^4.0.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+      - assets/page-1/images/iconly-glass-calendar.png
+      - assets/page-1/images/arrows-arrow-left.png
+      - assets/page-1/images/vector.png
+      - assets/page-1/images/monday.png
+      - assets/page-1/images/frame.png
+      - assets/page-1/images/group-20.png
+      - assets/page-1/images/sunday.png
+      - assets/page-1/images/add-list.png
+      - assets/page-1/images/vector-u1N.png
+      - assets/page-1/images/arrows-arrow-left-fHv.png
+      - assets/page-1/images/arrows-arrow-left-CHS.png
+      - assets/page-1/images/tuesday.png
+      - assets/page-1/images/add-list-Kkp.png
+      - assets/page-1/images/friday.png
+      - assets/page-1/images/vector-Trc.png
+      - assets/page-1/images/wednesday.png
+      - assets/page-1/images/group-26.png
+      - assets/page-1/images/icon.png
+      - assets/page-1/images/arrows-arrow-left-6pU.png
+      - assets/page-1/images/auto-group-byuz.png
+      - assets/page-1/images/add-list-s3A.png
+      - assets/page-1/images/arrows-arrow-left-MuE.png
+      - assets/page-1/images/add-list-UPv.png
+      - assets/page-1/images/notifications-question-circle.png
+      - assets/page-1/images/vector-dnc.png
+      - assets/page-1/images/arrows-arrow-left-DoJ.png
+      - assets/page-1/images/arrows-arrow-left-Qsn.png
+      - assets/page-1/images/vector-Jha.png
+      - assets/page-1/images/group-23.png
+      - assets/page-1/images/pills.png
+      - assets/page-1/images/thursday.png
+      - assets/page-1/images/frame-Ada.png
+      - assets/page-1/images/illustration-health.png
+      - assets/page-1/images/rectangle-41.png
+      - assets/page-1/images/rectangle-39.png
+      - assets/page-1/images/auto-group-1ma4.png
+      - assets/page-1/images/ghfgfb-1.png
+      - assets/page-1/images/arrows-arrow-left-Xgp.png
+      - assets/page-1/images/group-23-bsz.png
+      - assets/page-1/images/saturday.png
+      - assets/page-1/images/arrows-arrow-left-xDz.png
+      - assets/page-1/images/iconly-glass-calendar-YZS.png
+      - assets/page-1/images/arrows-arrow-left-qKS.png
+      - assets/page-1/images/group-24.png
+      - assets/page-1/images/ellipse-1.png
