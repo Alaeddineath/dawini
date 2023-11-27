@@ -98,6 +98,7 @@ class AddName extends StatelessWidget {
                   ],
                 ),
               ),
+              //bigest container
               Container(
                 // autogroupw56uhm6 (H8xtzcderzQ8X6GmJAw56U)
                 padding:
@@ -113,10 +114,15 @@ class AddName extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    TextField(
+                      decoration: InputDecoration(
+                      ),
+                    ),
+                    SizedBox(height: 20),
                     Container(
                       // typethenameofthemedXEL (11:17)
                       margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 39 * fem, 263 * fem),
+                          0 * fem, 0 * fem, 39 * fem, 200 * fem),
                       child: Text(
                         'type the name of the Med ',
                         textAlign: TextAlign.center,
