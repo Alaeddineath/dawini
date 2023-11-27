@@ -114,16 +114,6 @@ class AddName extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      // line1BwA (11:16)
-                      margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 0 * fem, 7 * fem),
-                      width: double.infinity,
-                      height: 1 * fem,
-                      decoration: BoxDecoration(
-                        color: Color(0xff34134e),
-                      ),
-                    ),
-                    Container(
                       // typethenameofthemedXEL (11:17)
                       margin: EdgeInsets.fromLTRB(
                           0 * fem, 0 * fem, 39 * fem, 263 * fem),
