@@ -1,3 +1,5 @@
+import 'package:dawini/utils.dart';
+import 'package:flutter/material.dart';
 import 'package:dawini/screens/home-page.dart';
 import 'package:dawini/screens/add-form.dart';
 import 'package:dawini/screens/add-frequency.dart';
@@ -9,8 +11,7 @@ import 'package:dawini/screens/empty-medecines-list.dart';
 import 'package:dawini/screens/medecine-info.dart';
 import 'package:dawini/screens/notification.dart';
 import 'package:dawini/screens/specify-schedule.dart';
-import 'package:dawini/utils.dart';
-import 'package:flutter/material.dart';
+import 'medecine.dart';
 
 void main() => runApp(const Dawini());
 
@@ -28,9 +29,9 @@ class Dawini extends StatelessWidget {
       ),
       initialRoute: '/home-page',
       routes: {
-        '/add-form': (context) => AddForm(),
+        '/add-form': (context) => AddForm(medecine: Medecine()),
         '/add-frequency': (context) => AddFrequency(),
-        '/add-name': (context) => AddName(),
+        '/add-name': (context) => AddName(medecine: Medecine()),
         '/add-schedule': (context) => AddSchedule(),
         '/add-time': (context) => AddTime(),
         '/empty-medecines-list': (context) => EmptyMedecinesList(),

@@ -1,13 +1,28 @@
 import 'package:dawini/utils.dart';
 import 'package:flutter/material.dart';
+import '../medecine.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late Medecine medecine;
+
+  @override
+  void initState() {
+    super.initState();
+    medecine = Medecine(name: '', form: '', frequency: '', time: '', dosage: 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-    return Container(
+    return Scaffold(
+        body: Container(
       width: double.infinity,
       child: Container(
         // homepageAig (1:3)
@@ -105,7 +120,7 @@ class HomePage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/add-name');
+                  Navigator.pushNamed(context, '/add-name',arguments: medecine);
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -156,6 +171,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ));
   }
 }

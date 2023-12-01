@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../medecine.dart';
 
 class Notifications extends StatelessWidget {
   @override

@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
+import '../medecine.dart';
 
-class AddName extends StatelessWidget {
+class AddName extends StatefulWidget {
+  final Medecine medecine;
+
+  AddName({required this.medecine});
+
+  @override
+  _AddNameState createState() => _AddNameState();
+}
+
+class _AddNameState extends State<AddName> {
+  late TextEditingController nameController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
@@ -115,8 +133,8 @@ class AddName extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextField(
-                      decoration: InputDecoration(
-                      ),
+                      controller: nameController,
+                      decoration: const InputDecoration(labelText: 'enter the name'),
                     ),
                     SizedBox(height: 20),
                     Container(
@@ -153,7 +171,8 @@ class AddName extends StatelessWidget {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/add-form');
+                          widget.medecine.name = nameController.text;
+                          Navigator.pushNamed(context, '/add-form', arguments: widget.medecine);
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(

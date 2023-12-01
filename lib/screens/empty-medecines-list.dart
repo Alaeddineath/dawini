@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-
+import '../medecine.dart';
 class EmptyMedecinesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

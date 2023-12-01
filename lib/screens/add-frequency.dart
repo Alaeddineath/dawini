@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../medecine.dart';
 class AddFrequency extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
