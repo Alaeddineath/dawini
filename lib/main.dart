@@ -9,7 +9,6 @@ import 'package:dawini/screens/add-time.dart';
 import 'package:dawini/screens/medecines-list.dart';
 import 'package:dawini/screens/empty-medecines-list.dart';
 import 'package:dawini/screens/medecine-info.dart';
-import 'package:dawini/screens/specify-schedule.dart';
 import 'medecine.dart';
 
 void main() => runApp(const Dawini());
@@ -37,7 +36,6 @@ class Dawini extends StatelessWidget {
         '/home-page': (context) => HomePage(),
         //'/medecine-info':(context) => MedecineInfo(),
         '/medicines-list': (context) => MedecinesList(),
-        '/specify-schedule': (context) => SpecifySchedule(),
       },
             onGenerateRoute: (RouteSettings settings) {
         // Handle dynamic routes
