@@ -21,7 +21,7 @@ class _AddFrequencyState extends State<AddFrequency> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          ' Select The Form',
+          ' Select The Frequency',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Color(0xfffff2ff),
@@ -49,7 +49,7 @@ class _AddFrequencyState extends State<AddFrequency> {
                     Container(
                       // autogroupqge8s72 (H8xvwZPTfEdo4v5B7zQGe8)
                       margin: EdgeInsets.fromLTRB(
-                          11.31 * fem, 0 * fem, 0 * fem, 8 * fem),
+                          11.31 * fem, 0 * fem, 0 * fem, 1 * fem),
                       padding: EdgeInsets.fromLTRB(
                           5.72 * fem, 10.83 * fem, 5.72 * fem, 14 * fem),
                       width: 78 * fem,

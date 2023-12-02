@@ -28,7 +28,7 @@ class _AddNameState extends State<AddName> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
-          ' Add a new medecine',
+          ' Add a new medicine',
           style: TextStyle(color: Colors.black),
         ),
         backgroundColor: Color(0xfffff2ff),
@@ -135,13 +135,14 @@ class _AddNameState extends State<AddName> {
                   children: [
                     TextField(
                       controller: nameController,
-                      decoration: const InputDecoration(labelText: 'enter the name'),
+                      decoration:
+                          const InputDecoration(labelText: 'enter the name'),
                     ),
                     SizedBox(height: 20),
                     Container(
                       // typethenameofthemedXEL (11:17)
                       margin: EdgeInsets.fromLTRB(
-                          0 * fem, 0 * fem, 39 * fem, 200 * fem),
+                          0 * fem, 0 * fem, 39 * fem, 190 * fem),
                       child: Text(
                         'type the name of the Med ',
                         textAlign: TextAlign.center,
@@ -173,7 +174,9 @@ class _AddNameState extends State<AddName> {
                       child: ElevatedButton(
                         onPressed: () {
                           widget.medecine.name = nameController.text;
-                          Navigator.pushNamed(context, '/add-form', arguments: widget.medecine);
+                          Navigator.pushNamed(context, '/add-form',
+                              arguments: widget.medecine);
+                          print(widget.medecine.name);
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(

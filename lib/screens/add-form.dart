@@ -94,7 +94,7 @@ class _AddFormState extends State<AddForm> {
                   Container(
                       // autogrouprbacdoA (H8xu7cRzhY5UMmgAqsrbac)
                       margin: EdgeInsets.fromLTRB(
-                          16 * fem, 0 * fem, 22 * fem, 0 * fem),
+                          16 * fem, 0 * fem, 25 * fem, 0 * fem),
                       width: double.infinity,
                       height: 50 * fem,
                       decoration: BoxDecoration(

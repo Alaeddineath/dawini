@@ -9,7 +9,6 @@ import 'package:dawini/screens/add-time.dart';
 import 'package:dawini/screens/medecines-list.dart';
 import 'package:dawini/screens/empty-medecines-list.dart';
 import 'package:dawini/screens/medecine-info.dart';
-import 'package:dawini/screens/notification.dart';
 import 'package:dawini/screens/specify-schedule.dart';
 import 'medecine.dart';
 
@@ -32,15 +31,28 @@ class Dawini extends StatelessWidget {
         '/add-form': (context) => AddForm(medecine: Medecine()),
         '/add-frequency': (context) => AddFrequency(medecine: Medecine()),
         '/add-name': (context) => AddName(medecine: Medecine()),
-        '/add-schedule': (context) => AddSchedule(),
-        '/add-time': (context) => AddTime(),
+        '/add-schedule': (context) => AddSchedule(medecine: Medecine()),
+        '/add-time': (context) => AddTime(medecine: Medecine()),
         '/empty-medecines-list': (context) => EmptyMedecinesList(),
         '/home-page': (context) => HomePage(),
-        '/medecine-info':(context) => MedecineInfo(),
-        '/medecines-list': (context) => MedecinesList(),
-        '/notification': (context) => Notifications(),
+        //'/medecine-info':(context) => MedecineInfo(),
+        '/medicines-list': (context) => MedecinesList(),
         '/specify-schedule': (context) => SpecifySchedule(),
       },
+            onGenerateRoute: (RouteSettings settings) {
+        // Handle dynamic routes
+        if (settings.name == '/medecine-info') {
+          final args = settings.arguments;
+          if (args is int) {
+            return MaterialPageRoute(
+              builder: (context) => MedecineInfo(index: args),
+            );
+          } 
+        }
+        // Return null for any other routes not defined here
+        // The system will use the `routes` table for static routes
+        return null;
+      }
     );
   }
 }

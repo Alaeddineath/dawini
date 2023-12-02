@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../medecine.dart';
 class EmptyMedecinesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -7,7 +6,7 @@ class EmptyMedecinesList extends StatelessWidget {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
-      appBar: AppBar(title: const Text('Medecines List',style: TextStyle(color: Colors.black),),
+      appBar: AppBar(title: const Text('Medicines List',style: TextStyle(color: Colors.black),),
       backgroundColor: const Color(0xfffff2ff),
       iconTheme: const IconThemeData(color: Color(0xfff43d4c)),),
       body: Container(
@@ -173,7 +172,7 @@ class EmptyMedecinesList extends StatelessWidget {
                   width: 192*fem,
                   height: 30*fem,
                   child: Text(
-                    'List of Medecines',
+                    'List of Medicines',
                     style: TextStyle (
                       fontSize: 24*ffem,
                       fontWeight: FontWeight.w700,
@@ -247,7 +246,7 @@ class EmptyMedecinesList extends StatelessWidget {
                   width: 392*fem,
                   height: 30*fem,
                   child: Text(
-                    'List of Medecines',
+                    'List of Medicines',
                     style: TextStyle (
                       fontSize: 24*ffem,
                       fontWeight: FontWeight.w700,

@@ -1,341 +1,200 @@
 import 'package:flutter/material.dart';
 import '../medecine.dart';
-class MedecineInfo extends StatelessWidget {
+
+class MedecineInfo extends StatefulWidget {
+  final int index;
+
+  MedecineInfo({Key? key, required this.index}) : super(key: key);
+
+  @override
+  _MedecineInfoState createState() => _MedecineInfoState();
+}
+
+class _MedecineInfoState extends State<MedecineInfo> {
+  late Medecine med;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize med based on the provided index
+    med = medecineList[widget.index];
+  }
+
+    void _addDay() {
+    setState(() {
+      med.addDay();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-    return Container(
-      width: double.infinity,
-      child: Container(
-        // medecineinfoxHA (753:134)
-        width: double.infinity,
-        decoration: BoxDecoration (
-          color: Color(0xfffff2ff),
+
+    return Scaffold(
+      appBar: AppBar( title: const Text( 'Medecine Info',
+          style: TextStyle(color: Colors.black),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        backgroundColor: Color(0xfffff2ff),
+        iconTheme: const IconThemeData(color: Color(0xfff43d4c)),
+      ),        
+      body: Stack( // our page components in columns
           children: [
-            Container(
-              // autogroupimecEEg (H8y7pL6mgMgTKRgTKZimEc)
-              padding: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 41*fem),
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    // rectangle39wun (753:158)
-                    margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 83.92*fem),
-                    width: 144*fem,
-                    height: 63.25*fem,
-                    child: Image.asset(
-                      'assets/page-1/images/rectangle-39.png',
-                      width: 144*fem,
-                      height: 63.25*fem,
-                    ),
-                  ),
-                  Container(
-                    // autogroup5qfef56 (H8y5UQ1GZTeP1eyzha5Qfe)
-                    margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 212*fem, 8*fem),
-                    padding: EdgeInsets.fromLTRB(16*fem, 16*fem, 17*fem, 17*fem),
-                    decoration: BoxDecoration (
-                      color: Color(0xafffe6ff),
-                      borderRadius: BorderRadius.circular(39*fem),
-                    ),
-                    child: Center(
-                      // group23m88 (753:153)
-                      child: SizedBox(
-                        width: 45*fem,
-                        height: 45*fem,
-                        child: Image.asset(
-                          'assets/page-1/images/group-23-bsz.png',
-                          width: 45*fem,
-                          height: 45*fem,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    // mednameUHS (753:151)
-                    margin: EdgeInsets.fromLTRB(35*fem, 0*fem, 0*fem, 0*fem),
-                    child: Text(
-                      '#Med Name',
-                      style: TextStyle (
-                        
-                        fontSize: 24*ffem,
-                        fontWeight: FontWeight.w700,
-                        height: 1.245*ffem/fem,
-                        color: Color(0xff34134e),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              // autogroupjsp8AAG (H8y5gopFqqK6RAq7FeJsp8)
-              width: double.infinity,
-              decoration: BoxDecoration (
-                color: Color(0xffffffff),
-                borderRadius: BorderRadius.only (
-                  topLeft: Radius.circular(40*fem),
-                  topRight: Radius.circular(40*fem),
+             Container(           //pink background
+            color: Color(0xfffff2ff),
+          ),
+          Positioned(         // White rounded rectangle
+            top: 218 * fem,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: MediaQuery.of(context).size.height - 218 * fem,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40 * fem),
+                  topRight: Radius.circular(40 * fem),
                 ),
               ),
+            ),
+          ),
+          Positioned(          // 'Med name' text
+            left: 35 * fem,
+            top: 147 * fem,
+            child: Text(
+              med.name,
+              style: TextStyle(
+                fontSize: 24 * ffem,
+                fontWeight: FontWeight.w700,
+                color: Color(0xff34134e),
+              ),
+            ),
+          ),
+          Positioned(          // med circle background
+            left: 37 * fem,
+            top: 61 * fem,
+            child: Container(
+              width: 78 * fem,
+              height: 78 * fem,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(39 * fem),
+                color: Color(0xafffe6ff),
+              ),
+            ),
+          ),
+          Positioned(          // med image
+            left: 53 * fem,
+            top: 77 * fem,
+            child: Image.asset(
+           'assets/page-1/images/group-23-bsz.png',
+              width: 45 * fem,
+              height: 45 * fem,
+            ),
+          ),
+            Positioned(// screen Items (H8y5gopFqqK6RAq7FeJsp8)
+            top: 234 * fem,
+            left: 0,
+            right: 0,
+            bottom: 0,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Container(
-                    // autogroupsofrs4g (H8y77S7FM3cGziYm3QSoFr)
-                    padding: EdgeInsets.fromLTRB(18*fem, 54*fem, 18*fem, 10*fem),
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          // formPYp (753:159)
-                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 5*fem),
-                          width: double.infinity,
-                          child: Text(
-                            'Form',
-                            textAlign: TextAlign.center,
-                            style: TextStyle (
-                              
-                              fontSize: 20*ffem,
-                              fontWeight: FontWeight.w400,
-                              height: 1.245*ffem/fem,
-                              color: Color(0xff000000),
-                            ),
-                          ),
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [ 
+                  ListTile(   //first row
+                    title: Text("Form", style: TextStyle(fontSize: 20),),
+                    subtitle: Text(med.form,
+                        style: TextStyle(
+                          fontSize: 20* ffem, // Increase font size
                         ),
-                        Container(
-                          // pill6i8 (753:160)
-                          width: double.infinity,
-                          child: Text(
-                            'Pill',
-                            textAlign: TextAlign.center,
-                            style: TextStyle (
-                              
-                              fontSize: 17*ffem,
-                              fontWeight: FontWeight.w400,
-                              height: 1.245*ffem/fem,
-                              color: Color(0xff6d6262),
-                            ),
-                          ),
+                  )),
+                  Divider(),
+                  ListTile(   //second row
+                    title: Text("Duration:", style: TextStyle(fontSize: 20),),
+                     subtitle: Text(
+                        "${med.getDuration()} Days ",
+                        style: TextStyle(
+                          fontSize: 20 * ffem, // Increase font size
                         ),
-                      ],
+                      ),
+                    trailing: ElevatedButton(
+                      onPressed:_addDay,
+                      child: Text('Add days' , 
+                          textAlign: TextAlign.center,
+                              style: TextStyle(
+                            fontSize:  15* ffem,
+                            fontWeight: FontWeight.w400,
+                            height: 1.2 * ffem / fem,
+                            color: Color(0xfffffefe),
+                          ),),
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 20),
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20 * fem),
+                      ),
+                        foregroundColor: Colors.pink[50],
+                        backgroundColor: Color.fromARGB(255, 250, 147, 155),
+                      ),
                     ),
                   ),
-                  Container(
-                    // line4di4 (753:162)
-                    margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 14*fem),
-                    width: double.infinity,
-                    height: 1*fem,
-                    decoration: BoxDecoration (
-                      color: Color(0xfff8f1f1),
+                  Divider(),
+                  ListTile(   //third row
+                    title: Text("Times per Day:", style: TextStyle(fontSize: 20),),
+                    subtitle: Text(med.frequency,
+                        style: TextStyle(
+                          fontSize: 20 * ffem, // Increase font size
+                        ),),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                      Navigator.pushNamed(context, '/add-frequency');
+
+                      },
+                      child: Text('Change', 
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                            fontSize:  15* ffem,
+                            fontWeight: FontWeight.w400,
+                            height: 1.2 * ffem / fem,
+                            color: Color(0xfffffefe),
+                          ),),
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 20),
+                        shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20 * fem),
+                      ),
+                        foregroundColor: Colors.pink[50],
+                        backgroundColor: Color.fromARGB(255, 250, 147, 155),
+                      ),
                     ),
                   ),
-                  Container(
-                    // autogroupcfzn9RW (H8y63xsfvPaV82vyjrCFZn)
-                    margin: EdgeInsets.fromLTRB(18.5*fem, 0*fem, 7*fem, 18*fem),
-                    width: double.infinity,
-                    height: 59*fem,
-                    child: Row(
+                  Divider(),
+                  SizedBox(height: 20 * fem), // Gives some spacing at the bottom
+                   Column(    //clock image and days left
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          // durationr52 (753:161)
-                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 16*fem, 34*fem),
-                          child: Text(
-                            'Duration:',
-                            textAlign: TextAlign.center,
-                            style: TextStyle (
-                              
-                              fontSize: 20*ffem,
-                              fontWeight: FontWeight.w400,
-                              height: 1.245*ffem/fem,
-                              color: Color(0xff000000),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          // daysxNx (753:164)
-                          margin: EdgeInsets.fromLTRB(0*fem, 37*fem, 89.5*fem, 0*fem),
-                          child: Text(
-                            '10 Days',
-                            textAlign: TextAlign.center,
-                            style: TextStyle (
-                              
-                              fontSize: 17*ffem,
-                              fontWeight: FontWeight.w400,
-                              height: 1.245*ffem/fem,
-                              color: Color(0xff6d6262),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          // autogroupczau3vC (H8y6CNoKajiS3jQRyocZaU)
-                          margin: EdgeInsets.fromLTRB(0*fem, 5*fem, 0*fem, 5*fem),
-                          width: 94*fem,
-                          height: double.infinity,
-                          decoration: BoxDecoration (
-                            color: Color(0xfffbe5e5),
-                            borderRadius: BorderRadius.circular(20*fem),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0x3f000000),
-                                offset: Offset(0*fem, 4*fem),
-                                blurRadius: 2*fem,
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Add days',
-                              textAlign: TextAlign.center,
-                              style: TextStyle (
-                                
-                                fontSize: 13*ffem,
-                                fontWeight: FontWeight.w400,
-                                height: 1.245*ffem/fem,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    // line5JLL (753:163)
-                    margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 23*fem),
-                    width: double.infinity,
-                    height: 1*fem,
-                    decoration: BoxDecoration (
-                      color: Color(0xfff8f1f1),
-                    ),
-                  ),
-                  Container(
-                    // autogroupbhatd7i (H8y6JscViXhgKw8szFBhAt)
-                    margin: EdgeInsets.fromLTRB(25*fem, 0*fem, 7*fem, 11*fem),
-                    width: double.infinity,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          // autogroupaqqzN5J (H8y6SY4PpkJUuv6tvJaQqz)
-                          margin: EdgeInsets.fromLTRB(0*fem, 7*fem, 69*fem, 0*fem),
-                          width: 165*fem,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                // timesperdayt3e (753:165)
-                                margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 17*fem),
-                                width: double.infinity,
-                                child: Text(
-                                  'Times per Day:',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle (
-                                    
-                                    fontSize: 19*ffem,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.245*ffem/fem,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                // oncedaily18G (753:167)
-                                width: double.infinity,
-                                child: Text(
-                                  'Once Daily',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle (
-                                    
-                                    fontSize: 17*ffem,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.245*ffem/fem,
-                                    color: Color(0xff6d6262),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          // autogroupyztz9EU (H8y6XNFgHMz5KrvpTryZTz)
-                          width: 94*fem,
-                          height: 49*fem,
-                          decoration: BoxDecoration (
-                            color: Color(0xfffbe5e5),
-                            borderRadius: BorderRadius.circular(20*fem),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color(0x3f000000),
-                                offset: Offset(0*fem, 4*fem),
-                                blurRadius: 2*fem,
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Change',
-                              textAlign: TextAlign.center,
-                              style: TextStyle (
-                                
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w400,
-                                height: 1.245*ffem/fem,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    // line6PuW (753:145)
-                    width: double.infinity,
-                    height: 1*fem,
-                    decoration: BoxDecoration (
-                      color: Color(0xfff8f1f1),
-                    ),
-                  ),
-                  Container(
-                    // autogroupu8z2wRE (H8y7DmG2uvNA66PZCku8Z2)
-                    padding: EdgeInsets.fromLTRB(26.33*fem, 30.33*fem, 34*fem, 46*fem),
-                    width: double.infinity,
-                    height: 273*fem,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          // autogroupvghif6L (H8y6f7Xmg3CZWFqfKTvgHi)
-                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 91*fem, 75.33*fem),
+                        Container( // clock picture
+                          margin: EdgeInsets.fromLTRB(60*fem, 0*fem, 10*fem, 30*fem),
                           width: double.infinity,
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
-                                // frameCMA (753:138)
+                              Container(// frameCMA (753:138)
                                 margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 65.33*fem, 0*fem),
                                 width: 72.35*fem,
                                 height: 72.34*fem,
                                 child: Image.asset(
                                   'assets/page-1/images/frame-Ada.png',
-                                  width: 72.35*fem,
-                                  height: 72.34*fem,
+                                  width: 50*fem,
+                                  height: 50*fem,
                                 ),
                               ),
-                              Center(
-                                // xdaysleftumN (753:137)
+                              Center(// xdaysleft (753:137)
                                 child: Container(
                                   margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0.07*fem),
                                   child: Text(
-                                    'x Days left',
+                                    "${med.getDaysLeft()} Days Left",
                                     textAlign: TextAlign.center,
                                     style: TextStyle (
                                       fontSize: 15*ffem,
@@ -348,86 +207,45 @@ class MedecineInfo extends StatelessWidget {
                               ),
                             ],
                           ),
-                        ),
-                        Container(
-                          // autogrouprcmrM7a (H8y6n7L7WasuLwF4sArCmr)
-                          margin: EdgeInsets.fromLTRB(15.67*fem, 0*fem, 0*fem, 0*fem),
-                          width: double.infinity,
-                          height: 49*fem,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                // autogrouprwdeUxt (H8y6tXK6MvFU2j2gx4rwDe)
-                                margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 70*fem, 0*fem),
-                                width: 107*fem,
-                                height: double.infinity,
-                                decoration: BoxDecoration (
-                                  color: Color(0xfff76d79),
-                                  borderRadius: BorderRadius.circular(20*fem),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color(0x3f000000),
-                                      offset: Offset(0*fem, 4*fem),
-                                      blurRadius: 2*fem,
-                                    ),
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'Back',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle (
-                                      
-                                      fontSize: 20*ffem,
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.245*ffem/fem,
-                                      color: Color(0xfffffefe),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                // autogroupzj4cMWt (H8y6xMY3R2YsKiWhR6ZJ4C)
-                                width: 107*fem,
-                                height: double.infinity,
-                                decoration: BoxDecoration (
-                                  color: Color(0xfff76d79),
-                                  borderRadius: BorderRadius.circular(20*fem),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color(0x3f000000),
-                                      offset: Offset(0*fem, 4*fem),
-                                      blurRadius: 2*fem,
-                                    ),
-                                  ],
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'Delete',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle (
-                                      
-                                      fontSize: 20*ffem,
-                                      fontWeight: FontWeight.w400,
-                                      height: 1.245*ffem/fem,
-                                      color: Color(0xfffffefe),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        )
                       ],
+                   ),
+                  SizedBox(height: 16 * fem),
+                  ElevatedButton(   //delete button
+                    onPressed: () {
+                        // Remove the medicine from the list
+                        setState(() {
+                          medecineList.removeAt(widget.index);
+                        });
+                        // Navigate back to the previous screen
+                        Navigator.pop(context);
+                      },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero, // Use zero padding if you want the button to fill its parent
+                      backgroundColor: Color(0xb7f43d4c), // Background color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20 * fem),
+                      ),
+                      shadowColor: Color(0x3f000000),
+                      elevation: 2 * fem,
+                      fixedSize: Size(250 * fem, 50 * fem), // Button size
+                    ),
+                    child: Text(
+                      'Delete',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20 * ffem,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xfffffefe),
+                      ),
                     ),
                   ),
+                  SizedBox(height: 20 * fem), // Gives some spacing at the bottom
                 ],
               ),
             ),
           ],
         ),
-      ),
-          );
+    );
   }
 }
