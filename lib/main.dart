@@ -30,7 +30,7 @@ class Dawini extends StatelessWidget {
       initialRoute: '/home-page',
       routes: {
         '/add-form': (context) => AddForm(medecine: Medecine()),
-        '/add-frequency': (context) => AddFrequency(),
+        '/add-frequency': (context) => AddFrequency(medecine: Medecine()),
         '/add-name': (context) => AddName(medecine: Medecine()),
         '/add-schedule': (context) => AddSchedule(),
         '/add-time': (context) => AddTime(),

@@ -25,6 +25,7 @@ class _AddNameState extends State<AddName> {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text(
           ' Add a new medecine',
@@ -120,7 +121,7 @@ class _AddNameState extends State<AddName> {
               Container(
                 // autogroupw56uhm6 (H8xtzcderzQ8X6GmJAw56U)
                 padding:
-                    EdgeInsets.fromLTRB(36 * fem, 99 * fem, 36 * fem, 70 * fem),
+                    EdgeInsets.fromLTRB(36 * fem, 99 * fem, 36 * fem, 69 * fem),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Color(0xffffffff),
