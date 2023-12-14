@@ -1,9 +1,9 @@
+import 'package:dawini/screens/add-frequency.dart';
 import 'package:flutter/material.dart';
 import '../medecine.dart';
 
 class AddForm extends StatefulWidget {
   final Medecine medecine;
-
   AddForm({required this.medecine});
 
   @override
@@ -114,8 +114,9 @@ class _AddFormState extends State<AddForm> {
                             selectedForm = 'Pill';
                           });
                           widget.medecine.form = selectedForm;
-                          Navigator.pushNamed(context, '/add-frequency',
-                              arguments: widget.medecine);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddFrequency(medecine: widget.medecine)));
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(

@@ -1,3 +1,4 @@
+import 'package:dawini/screens/add-schedule.dart';
 import 'package:flutter/material.dart';
 import '../medecine.dart';
 
@@ -330,7 +331,9 @@ class AddTimeState extends State<AddTime> {
                         child: ElevatedButton(
                           onPressed: () {
                             widget.medecine.time="$selectedHour x $selectedMinute";
-                            Navigator.pushNamed(context, '/add-schedule',arguments: widget.medecine);
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddSchedule(medecine: widget.medecine)));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xb7f43d4c),

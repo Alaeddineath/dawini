@@ -1,9 +1,10 @@
+import 'package:dawini/screens/add-time.dart';
+import 'package:dawini/screens/specify-schedule.dart';
 import 'package:flutter/material.dart';
 import '../medecine.dart';
 
 class AddFrequency extends StatefulWidget {
   final Medecine medecine;
-
   AddFrequency({required this.medecine});
 
   @override
@@ -126,11 +127,12 @@ class _AddFrequencyState extends State<AddFrequency> {
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              frequency = 'Once';
+                              frequency = '1';
                             });
                             widget.medecine.frequency = frequency;
-                            Navigator.pushNamed(context, '/add-time',
-                                arguments: widget.medecine);
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddTime(medecine: widget.medecine)));
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
@@ -143,7 +145,7 @@ class _AddFrequencyState extends State<AddFrequency> {
                             elevation: 2 * fem,
                           ),
                           child: Text(
-                            'Once Daily',
+                            'Once',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 20 * ffem,
@@ -176,11 +178,12 @@ class _AddFrequencyState extends State<AddFrequency> {
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              frequency = 'twice';
+                              frequency = '2';
                             });
                             widget.medecine.form = frequency;
-                            Navigator.pushNamed(context, '/add-time',
-                                arguments: widget.medecine);
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddTime(medecine: widget.medecine)));
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
@@ -226,11 +229,12 @@ class _AddFrequencyState extends State<AddFrequency> {
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              frequency = '3times';
+                              frequency = '3';
                             });
                             widget.medecine.form = frequency;
-                            Navigator.pushNamed(context, '/add-time',
-                                arguments: widget.medecine);
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddTime(medecine: widget.medecine)));
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
@@ -276,11 +280,12 @@ class _AddFrequencyState extends State<AddFrequency> {
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              frequency = '4times';
+                              frequency = '4';
                             });
                             widget.medecine.form = frequency;
-                            Navigator.pushNamed(context, '/add-time',
-                                arguments: widget.medecine);
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddTime(medecine: widget.medecine)));
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
@@ -329,8 +334,9 @@ class _AddFrequencyState extends State<AddFrequency> {
                               frequency = 'only as needed';
                             });
                             widget.medecine.form = frequency;
-                            Navigator.pushNamed(context, '/specify-schedule',
-                                arguments: widget.medecine);
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  SpecifySchedule(medecine: widget.medecine)));
                           },
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(

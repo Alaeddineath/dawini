@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../medecine.dart'; 
 
 class MedecinesList extends StatelessWidget {
+  final Medecine medecine;
+  MedecinesList({required this.medecine});
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;

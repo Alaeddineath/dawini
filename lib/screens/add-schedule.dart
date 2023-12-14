@@ -1,3 +1,4 @@
+import 'package:dawini/screens/medecines-list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../medecine.dart';
@@ -298,11 +299,12 @@ class _AddScheduleState extends State<AddSchedule> {
                       child: ElevatedButton(
                         onPressed: () {
                           print("Navigating to Medicines List");
-                          medecineList.add(widget.medecine);
-                          Navigator.pushReplacementNamed(
-                            context,
-                            '/medicines-list',
-                          );
+                          setState(() {
+                            medecineList.add(widget.medecine);
+                          });
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  MedecinesList(medecine: widget.medecine)));
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(

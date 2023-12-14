@@ -1,3 +1,4 @@
+import 'package:dawini/screens/add-form.dart';
 import 'package:flutter/material.dart';
 import '../medecine.dart';
 
@@ -174,8 +175,9 @@ class _AddNameState extends State<AddName> {
                       child: ElevatedButton(
                         onPressed: () {
                           widget.medecine.name = nameController.text;
-                          Navigator.pushNamed(context, '/add-form',
-                              arguments: widget.medecine);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddForm(medecine: widget.medecine)));
                           print(widget.medecine.name);
                         },
                         style: ElevatedButton.styleFrom(

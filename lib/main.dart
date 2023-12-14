@@ -35,7 +35,7 @@ class Dawini extends StatelessWidget {
         '/empty-medecines-list': (context) => EmptyMedecinesList(),
         '/home-page': (context) => HomePage(),
         //'/medecine-info':(context) => MedecineInfo(),
-        '/medicines-list': (context) => MedecinesList(),
+        '/medicines-list': (context) => MedecinesList(medecine: Medecine()),
       },
             onGenerateRoute: (RouteSettings settings) {
         // Handle dynamic routes
