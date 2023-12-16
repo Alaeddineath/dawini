@@ -9,7 +9,8 @@ import 'package:dawini/screens/add-time.dart';
 import 'package:dawini/screens/medecines-list.dart';
 import 'package:dawini/screens/empty-medecines-list.dart';
 import 'package:dawini/screens/medecine-info.dart';
-import 'medecine.dart';
+import 'package:dawini/screens/modify-medecine.dart';
+import 'medecine.dart'; // THIS IS GOTTA GET DELETED LATER
 
 void main() => runApp(const Dawini());
 
@@ -21,7 +22,7 @@ class Dawini extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter',
       debugShowCheckedModeBanner: false,
-      scrollBehavior: MyCustomScrollBehavior(),
+      scrollBehavior: MyCustomScrollBehavior(), // Ensure this class is defined
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -34,10 +35,10 @@ class Dawini extends StatelessWidget {
         '/add-time': (context) => AddTime(medecine: Medecine()),
         '/empty-medecines-list': (context) => EmptyMedecinesList(),
         '/home-page': (context) => HomePage(),
-        //'/medecine-info':(context) => MedecineInfo(),
         '/medicines-list': (context) => MedecinesList(medecine: Medecine()),
+        // Removed '/medecine-info' from static routes as it's handled dynamically
       },
-            onGenerateRoute: (RouteSettings settings) {
+      onGenerateRoute: (RouteSettings settings) {
         // Handle dynamic routes
         if (settings.name == '/medecine-info') {
           final args = settings.arguments;
@@ -46,11 +47,18 @@ class Dawini extends StatelessWidget {
               builder: (context) => MedecineInfo(index: args),
             );
           } 
+        } else if (settings.name == '/modify-medecine') {
+          final args = settings.arguments;
+          if (args is int?) { // Allowing for null as well
+            return MaterialPageRoute(
+              builder: (context) => ModifyMedecine(id: args),
+            );
+          }
         }
         // Return null for any other routes not defined here
         // The system will use the `routes` table for static routes
         return null;
-      }
+      },
     );
   }
 }

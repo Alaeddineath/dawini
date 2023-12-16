@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import '../medecine.dart'; 
-
-class MedecinesList extends StatelessWidget {
+import 'package:dawini/databases/db.dart';
+import '../medecine.dart';
+class MedecinesList extends StatefulWidget {
   final Medecine medecine;
   MedecinesList({required this.medecine});
+
+  @override
+  State<MedecinesList> createState() => _MedecinesListState();
+}
+
+class _MedecinesListState extends State<MedecinesList> {
   @override
   Widget build(BuildContext context) {
     double baseWidth = 360;
@@ -76,73 +82,91 @@ class MedecinesList extends StatelessWidget {
               height: 45 * fem,
             ),
           ),
-          Positioned(          // List of medicines 
+          Positioned(
             top: 234 * fem,
             left: 0,
             right: 0,
             bottom: 0,
-            child:ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: medecineList.length,
-              itemBuilder: (context, index) {
-                Medecine med = medecineList[index];
-                return GestureDetector(
-                  onTap: () {Navigator.pushNamed(context,'/medecine-info',arguments: index, );
-                  },// passing the name of the medicine
-                  child: Card(
-                    margin: EdgeInsets.fromLTRB(8 * fem, 6 * fem, 14 * fem, 7 * fem),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15 * fem),
-                    ),
-                    color: Color.fromARGB(255, 255, 250, 255),
-                    child: Padding(
-                      padding: EdgeInsets.all(8 * fem),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(6 * fem),
-                            child: Image.asset(
-                              'assets/page-1/images/vector-Jha.png',
-                              width: 60 * fem,
-                              height: 60 * fem,
-                            ),
+            child: FutureBuilder<List<Map<String, dynamic>>>(
+              future: MedicineDB.getAllMedicines(), // Fetch all medicines from the database
+              builder: (BuildContext context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (snapshot.hasData) {
+                  List<Map<String, dynamic>> medicines = snapshot.data!; // Assign the data to 'medicines'
+                  /*if (medicines.isEmpty) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.of(context).pushReplacementNamed('/empty-medecines-list');
+                    });
+                  }*/
+                  return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: medicines.length, 
+                    itemBuilder: (context, index) {
+                      var med = medicines[index]; 
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/medicine-info', arguments: med['id']);
+                        },
+                        child: Card(
+                          margin: EdgeInsets.fromLTRB(8 * fem, 6 * fem, 14 * fem, 7 * fem),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15 * fem),
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          color: Color.fromARGB(255, 255, 250, 255),
+                          child: Padding(
+                            padding: EdgeInsets.all(8 * fem),
+                            child: Row(
                               children: [
-                                Text(
-                                  med.name,
-                                  style: TextStyle(
-                                    fontSize: 20 * ffem,
-                                    color: Color(0xfffb5361),
+                                Padding(
+                                  padding: EdgeInsets.all(6 * fem),
+                                  child: Image.asset(
+                                    'assets/page-1/images/vector-Jha.png',
+                                    width: 60 * fem,
+                                    height: 60 * fem,
                                   ),
                                 ),
-                                SizedBox(height: 4 * fem),
-                                Text(
-                                  '${med.frequency} \n${med.time}',
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        med['name'], // Accessing directly from the map
+                                        style: TextStyle(
+                                          fontSize: 20 * ffem,
+                                          color: Color(0xfffb5361),
+                                        ),
+                                      ),
+                                      SizedBox(height: 4 * fem),
+                                      Text(
+                                        '${med['frequency']} \n${med['time']}', // Accessing directly from the map
+                                        style: TextStyle(
+                                          fontSize: 16 * ffem,
+                                          color: Color(0xff35134f),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                /*Text(
+                                  "${DateTime.parse(med['endDate']).difference(DateTime.now()).inDays} Days Left",
                                   style: TextStyle(
                                     fontSize: 16 * ffem,
-                                    color: Color(0xff35134f),
+                                    color: Color(0xff999999),
                                   ),
-                                ),
+                                ),*/
                               ],
                             ),
                           ),
-                          Text(
-                           "${med.getDaysLeft()} Days Left",
-                            style: TextStyle(
-                              fontSize: 16 * ffem,
-                              color: Color(0xff999999),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Container();
+                }
               },
-            )
+            ),
           ),
         ],
       ),

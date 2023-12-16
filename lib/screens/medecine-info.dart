@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../medecine.dart';
+import 'package:dawini/databases/db.dart';
 
 class MedecineInfo extends StatefulWidget {
   final int index;
@@ -11,19 +11,52 @@ class MedecineInfo extends StatefulWidget {
 }
 
 class _MedecineInfoState extends State<MedecineInfo> {
-  late Medecine med;
+  late Map<String, dynamic> med; // Define the Medecine object
 
   @override
   void initState() {
     super.initState();
-    // Initialize med based on the provided index
-    med = medecineList[widget.index];
+    fetchMedicineData();
   }
 
-  void _addDay() {
-    setState(() {
-      med.addDay();
-    });
+  void fetchMedicineData() async {
+    final medicines = await MedicineDB.getAllMedicines();
+    if (widget.index < medicines.length) {
+      final Map<String, dynamic> medicineData = medicines[widget.index];
+      setState(() {
+        // Initialize med based on the retrieved data
+        med = medicineData;
+      });
+    }
+  }
+
+  void _addDay() async {
+    // Check if med is not null and has an id
+    if (med != null && med['id'] != null) {
+      // Update the database
+      await MedicineDB.addDay(med['id']);
+
+      // Calculate the new duration and update the med object
+      int currentDuration = med['duration'];
+      int newDuration = currentDuration + 1;
+      setState(() {
+        med['duration'] = newDuration;
+      });
+
+      // Navigate back to the previous screen
+      Navigator.pop(context);
+    }
+  }
+
+  void _deleteMedicine() async {
+    // Check if med is not null and has an id
+    if (med != null && med['id'] != null) {
+      // Delete the medicine from the database
+      await MedicineDB.deleteMedicine(med['id']);
+
+      // Navigate back to the previous screen
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -45,7 +78,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
         // our page components in columns
         children: [
           Container(
-            //pink background
+            // pink background
             color: Color(0xfffff2ff),
           ),
           Positioned(
@@ -69,7 +102,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
             left: 35 * fem,
             top: 147 * fem,
             child: Text(
-              med.name,
+              med['name'],
               style: TextStyle(
                 fontSize: 24 * ffem,
                 fontWeight: FontWeight.w700,
@@ -101,7 +134,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
             ),
           ),
           Positioned(
-            // screen Items (H8y5gopFqqK6RAq7FeJsp8)
+            // screen Items
             top: 234 * fem,
             left: 0,
             right: 0,
@@ -111,26 +144,27 @@ class _MedecineInfoState extends State<MedecineInfo> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ListTile(
-                    //first row
-                    title: Text(
-                      "Form",
-                      style: TextStyle(fontSize: 20),
+                  // first row
+                  title: Text(
+                    "Form",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  subtitle: Text(
+                    med['form'],
+                    style: TextStyle(
+                      fontSize: 20 * ffem, // Increase font size
                     ),
-                    subtitle: Text(
-                      med.form,
-                      style: TextStyle(
-                        fontSize: 20 * ffem, // Increase font size
-                      ),
-                    )),
+                  ),
+                ),
                 Divider(),
                 ListTile(
-                  //second row
+                  // second row
                   title: Text(
                     "Duration:",
                     style: TextStyle(fontSize: 20),
                   ),
                   subtitle: Text(
-                    "${med.getDuration()} Days ",
+                    "${med['duration']} Days ",
                     style: TextStyle(
                       fontSize: 20 * ffem, // Increase font size
                     ),
@@ -160,20 +194,20 @@ class _MedecineInfoState extends State<MedecineInfo> {
                 ),
                 Divider(),
                 ListTile(
-                  //third row
+                  // third row
                   title: Text(
                     "Times per Day:",
                     style: TextStyle(fontSize: 20),
                   ),
                   subtitle: Text(
-                    med.frequency,
+                    med['frequency'],
                     style: TextStyle(
                       fontSize: 20 * ffem, // Increase font size
                     ),
                   ),
                   trailing: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/add-frequency');
+                  onPressed: () {
+                      Navigator.pushNamed(context, '/ModifyMedecine', arguments: med['id']);
                     },
                     child: Text(
                       'Change',
@@ -199,21 +233,19 @@ class _MedecineInfoState extends State<MedecineInfo> {
                 Divider(),
                 SizedBox(height: 20 * fem), // Gives some spacing at the bottom
                 Column(
-                  //clock image and days left
+                  // clock image and days left
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       // clock picture
-                      margin: EdgeInsets.fromLTRB(
-                          60 * fem, 0 * fem, 10 * fem, 30 * fem),
+                      margin: EdgeInsets.fromLTRB(60 * fem, 0 * fem, 10 * fem, 30 * fem),
                       width: double.infinity,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             // frameCMA (753:138)
-                            margin: EdgeInsets.fromLTRB(
-                                0 * fem, 0 * fem, 65.33 * fem, 0 * fem),
+                            margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 65.33 * fem, 0 * fem),
                             width: 72.35 * fem,
                             height: 72.34 * fem,
                             child: Image.asset(
@@ -225,10 +257,9 @@ class _MedecineInfoState extends State<MedecineInfo> {
                           Center(
                             // xdaysleft (753:137)
                             child: Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  0 * fem, 0 * fem, 0 * fem, 0.07 * fem),
+                              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0.07 * fem),
                               child: Text(
-                                "${med.getDaysLeft()} Days Left",
+                                "${med['duration']} Days Left",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 15 * ffem,
@@ -246,18 +277,10 @@ class _MedecineInfoState extends State<MedecineInfo> {
                 ),
                 SizedBox(height: 16 * fem),
                 ElevatedButton(
-                  //delete button
-                  onPressed: () {
-                    // Remove the medicine from the list
-                    setState(() {
-                      medecineList.removeAt(widget.index);
-                      Navigator.pushNamed(context, '/medicines-list');
-                    });
-                    // Navigate back to the previous screen
-                  },
+                  // delete button
+                  onPressed: _deleteMedicine,
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets
-                        .zero, // Use zero padding if you want the button to fill its parent
+                    padding: EdgeInsets.zero, // Use zero padding if you want the button to fill its parent
                     backgroundColor: Color(0xb7f43d4c), // Background color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20 * fem),

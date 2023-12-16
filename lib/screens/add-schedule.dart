@@ -1,6 +1,7 @@
 import 'package:dawini/screens/medecines-list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../databases/db.dart';
 import '../medecine.dart';
 
 class AddSchedule extends StatefulWidget {
@@ -305,6 +306,26 @@ class _AddScheduleState extends State<AddSchedule> {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   MedecinesList(medecine: widget.medecine)));
+                          print(
+                              "${widget.medecine.dosage},${widget.medecine.form}");
+                          MedicineDB.insertMedicine({
+                            'name': widget.medecine.name,
+                            'form': widget.medecine.form,
+                            'frequency': widget.medecine.frequency,
+                            'time': widget.medecine.time,
+                            'dosage': widget.medecine.dosage,
+                            'startDate':widget.medecine.startDate,
+                            'endDate': widget.medecine.endDate,
+                          });
+                          MedicineDB.insertMedicine({
+                            'name': "doliprane",
+                            'form': "pill",
+                            'frequency': "3",
+                            'time': "5",
+                            'dosage': 4,
+                            'startDate':"1515",
+                            'endDate': "2020",
+                          });
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(
