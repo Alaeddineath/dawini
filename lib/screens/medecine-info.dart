@@ -11,7 +11,7 @@ class MedecineInfo extends StatefulWidget {
 }
 
 class _MedecineInfoState extends State<MedecineInfo> {
-  late Map<String, dynamic> med; // Define the Medecine object
+  Map<String, dynamic>? med; // Now a nullable type
 
   @override
   void initState() {
@@ -22,40 +22,29 @@ class _MedecineInfoState extends State<MedecineInfo> {
   void fetchMedicineData() async {
     final medicines = await MedicineDB.getAllMedicines();
     if (widget.index < medicines.length) {
-      final Map<String, dynamic> medicineData = medicines[widget.index];
       setState(() {
-        // Initialize med based on the retrieved data
-        med = medicineData;
+        med = medicines[widget.index];
       });
     }
   }
 
   void _addDay() async {
-    // Check if med is not null and has an id
-    if (med != null && med['id'] != null) {
-      // Update the database
-      await MedicineDB.addDay(med['id']);
-
-      // Calculate the new duration and update the med object
-      int currentDuration = med['duration'];
+    if (med != null && med!['id'] != null) {
+      await MedicineDB.addDay(med!['id']);
+      int currentDuration = med!['duration'];
       int newDuration = currentDuration + 1;
       setState(() {
-        med['duration'] = newDuration;
+        med!['duration'] = newDuration;
       });
-
-      // Navigate back to the previous screen
-      Navigator.pop(context);
     }
   }
 
   void _deleteMedicine() async {
-    // Check if med is not null and has an id
-    if (med != null && med['id'] != null) {
-      // Delete the medicine from the database
-      await MedicineDB.deleteMedicine(med['id']);
+    if (med != null && med!['id'] != null) {
+      await MedicineDB.deleteMedicine(med!['id']);
+      Navigator.popUntil(context, ModalRoute.withName('/home-page'));
+      Navigator.pushNamed( context,'/medicines-list');
 
-      // Navigate back to the previous screen
-      Navigator.pop(context);
     }
   }
 
@@ -64,6 +53,18 @@ class _MedecineInfoState extends State<MedecineInfo> {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+
+    if (med == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Medecine Info'),
+          backgroundColor: Color(0xfffff2ff),
+          iconTheme: const IconThemeData(color: Color(0xfff43d4c)),
+        ),
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
 
     return Scaffold(
       appBar: AppBar(
@@ -102,7 +103,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
             left: 35 * fem,
             top: 147 * fem,
             child: Text(
-              med['name'],
+              med?['name'],
               style: TextStyle(
                 fontSize: 24 * ffem,
                 fontWeight: FontWeight.w700,
@@ -150,7 +151,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
                     style: TextStyle(fontSize: 20),
                   ),
                   subtitle: Text(
-                    med['form'],
+                    med?['form'],
                     style: TextStyle(
                       fontSize: 20 * ffem, // Increase font size
                     ),
@@ -164,7 +165,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
                     style: TextStyle(fontSize: 20),
                   ),
                   subtitle: Text(
-                    "${med['duration']} Days ",
+                    "${med?['duration']} Days ",
                     style: TextStyle(
                       fontSize: 20 * ffem, // Increase font size
                     ),
@@ -200,14 +201,14 @@ class _MedecineInfoState extends State<MedecineInfo> {
                     style: TextStyle(fontSize: 20),
                   ),
                   subtitle: Text(
-                    med['frequency'],
+                    med?['frequency'],
                     style: TextStyle(
                       fontSize: 20 * ffem, // Increase font size
                     ),
                   ),
                   trailing: ElevatedButton(
                   onPressed: () {
-                      Navigator.pushNamed(context, '/ModifyMedecine', arguments: med['id']);
+                      Navigator.pushNamed(context, '/ModifyMedecine', arguments: med?['id']);
                     },
                     child: Text(
                       'Change',
@@ -259,7 +260,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
                             child: Container(
                               margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0.07 * fem),
                               child: Text(
-                                "${med['duration']} Days Left",
+                                "${med?['duration']} Days Left",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 15 * ffem,

@@ -1,3 +1,4 @@
+import 'package:dawini/screens/add-time.dart';
 import 'package:flutter/material.dart';
 import '../medecine.dart';
 
@@ -116,7 +117,7 @@ class _SpecifyScheduleState extends State<SpecifySchedule> {
                               'Select the days',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                fontSize: 25 * ffem,
+                                fontSize: 20 * ffem,
                                 fontWeight: FontWeight.w400,
                                 height: 1.245 * ffem / fem,
                                 color: Color(0xff000000),
@@ -190,7 +191,9 @@ class _SpecifyScheduleState extends State<SpecifySchedule> {
                             widthFactor: 0.8,
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/add-time');
+                                Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddTime(medecine: widget.medecine)));
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(0xb7f43d4c),

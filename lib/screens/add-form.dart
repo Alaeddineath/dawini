@@ -110,13 +110,19 @@ class _AddFormState extends State<AddForm> {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            selectedForm = 'Pill';
-                          });
+                      
+                          selectedForm = 'Pill';
                           widget.medecine.form = selectedForm;
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   AddFrequency(medecine: widget.medecine)));
+                                  print("name: ${widget.medecine.name}\n");
+                          print("form: ${widget.medecine.form}\n");
+                          print("frequency: ${widget.medecine.frequency}\n");
+                          print("time: ${widget.medecine.time}\n");
+                          print("dosage: ${widget.medecine.dosage}\n");
+                          print("star: ${widget.medecine.startDate}\n");
+                          print("end: ${widget.medecine.endDate}\n");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
@@ -161,12 +167,18 @@ class _AddFormState extends State<AddForm> {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            selectedForm = 'Injection';
-                          });
+                          selectedForm = 'Injection';
                           widget.medecine.form = selectedForm;
-                          Navigator.pushNamed(context, '/add-frequency',
-                              arguments: widget.medecine);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddFrequency(medecine: widget.medecine)));
+                                  print("name: ${widget.medecine.name}\n");
+                          print("form: ${widget.medecine.form}\n");
+                          print("frequency: ${widget.medecine.frequency}\n");
+                          print("time: ${widget.medecine.time}\n");
+                          print("dosage: ${widget.medecine.dosage}\n");
+                          print("star: ${widget.medecine.startDate}\n");
+                          print("end: ${widget.medecine.endDate}\n");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
@@ -211,12 +223,18 @@ class _AddFormState extends State<AddForm> {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            selectedForm = 'Powder';
-                          });
+                          selectedForm = 'Powder';
                           widget.medecine.form = selectedForm;
-                          Navigator.pushNamed(context, '/add-frequency',
-                              arguments: widget.medecine);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddFrequency(medecine: widget.medecine)));
+                                  print("name: ${widget.medecine.name}\n");
+                          print("form: ${widget.medecine.form}\n");
+                          print("frequency: ${widget.medecine.frequency}\n");
+                          print("time: ${widget.medecine.time}\n");
+                          print("dosage: ${widget.medecine.dosage}\n");
+                          print("star: ${widget.medecine.startDate}\n");
+                          print("end: ${widget.medecine.endDate}\n");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
@@ -261,12 +279,18 @@ class _AddFormState extends State<AddForm> {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            selectedForm = 'Drops';
-                          });
+                          selectedForm = 'Drops';
                           widget.medecine.form = selectedForm;
-                          Navigator.pushNamed(context, '/add-frequency',
-                              arguments: widget.medecine);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddFrequency(medecine: widget.medecine)));
+                                  print("name: ${widget.medecine.name}\n");
+                          print("form: ${widget.medecine.form}\n");
+                          print("frequency: ${widget.medecine.frequency}\n");
+                          print("time: ${widget.medecine.time}\n");
+                          print("dosage: ${widget.medecine.dosage}\n");
+                          print("star: ${widget.medecine.startDate}\n");
+                          print("end: ${widget.medecine.endDate}\n");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(
@@ -311,12 +335,18 @@ class _AddFormState extends State<AddForm> {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          setState(() {
-                            selectedForm = 'Inhaler';
-                          });
+                          selectedForm = 'inhaler';
                           widget.medecine.form = selectedForm;
-                          Navigator.pushNamed(context, '/add-frequency',
-                              arguments: widget.medecine);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  AddFrequency(medecine: widget.medecine)));
+                                  print("name: ${widget.medecine.name}\n");
+                          print("form: ${widget.medecine.form}\n");
+                          print("frequency: ${widget.medecine.frequency}\n");
+                          print("time: ${widget.medecine.time}\n");
+                          print("dosage: ${widget.medecine.dosage}\n");
+                          print("star: ${widget.medecine.startDate}\n");
+                          print("end: ${widget.medecine.endDate}\n");
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(

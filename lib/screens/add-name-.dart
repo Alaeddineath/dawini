@@ -175,10 +175,16 @@ class _AddNameState extends State<AddName> {
                       child: ElevatedButton(
                         onPressed: () {
                           widget.medecine.name = nameController.text;
+                          print("name: ${widget.medecine.name}\n");
+                          print("form: ${widget.medecine.form}\n");
+                          print("frequency: ${widget.medecine.frequency}\n");
+                          print("time: ${widget.medecine.time}\n");
+                          print("dosage: ${widget.medecine.dosage}\n");
+                          print("star: ${widget.medecine.startDate}\n");
+                          print("end: ${widget.medecine.endDate}\n");
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   AddForm(medecine: widget.medecine)));
-                          print(widget.medecine.name);
                         },
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(

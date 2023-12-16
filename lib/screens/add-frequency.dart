@@ -180,7 +180,7 @@ class _AddFrequencyState extends State<AddFrequency> {
                             setState(() {
                               frequency = '2';
                             });
-                            widget.medecine.form = frequency;
+                            widget.medecine.frequency = frequency;
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   AddTime(medecine: widget.medecine)));
@@ -231,7 +231,7 @@ class _AddFrequencyState extends State<AddFrequency> {
                             setState(() {
                               frequency = '3';
                             });
-                            widget.medecine.form = frequency;
+                            widget.medecine.frequency = frequency;
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   AddTime(medecine: widget.medecine)));
@@ -282,7 +282,7 @@ class _AddFrequencyState extends State<AddFrequency> {
                             setState(() {
                               frequency = '4';
                             });
-                            widget.medecine.form = frequency;
+                            widget.medecine.frequency = frequency;
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   AddTime(medecine: widget.medecine)));
@@ -333,7 +333,7 @@ class _AddFrequencyState extends State<AddFrequency> {
                             setState(() {
                               frequency = 'only as needed';
                             });
-                            widget.medecine.form = frequency;
+                            widget.medecine.frequency = frequency;
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   SpecifySchedule(medecine: widget.medecine)));

@@ -300,31 +300,24 @@ class _AddScheduleState extends State<AddSchedule> {
                       child: ElevatedButton(
                         onPressed: () {
                           print("Navigating to Medicines List");
-                          setState(() {
-                            medecineList.add(widget.medecine);
-                          });
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   MedecinesList(medecine: widget.medecine)));
-                          print(
-                              "${widget.medecine.dosage},${widget.medecine.form}");
+                          print("name: ${widget.medecine.name}\n");
+                          print("form: ${widget.medecine.form}\n");
+                          print("frequency: ${widget.medecine.frequency}\n");
+                          print("time: ${widget.medecine.time}\n");
+                          print("dosage: ${widget.medecine.dosage}\n");
+                          print("star: ${widget.medecine.startDate}\n");
+                          print("end: ${widget.medecine.endDate}\n");
                           MedicineDB.insertMedicine({
                             'name': widget.medecine.name,
                             'form': widget.medecine.form,
                             'frequency': widget.medecine.frequency,
-                            'time': widget.medecine.time,
+                            'time': widget.medecine.time.toString(),
                             'dosage': widget.medecine.dosage,
-                            'startDate':widget.medecine.startDate,
-                            'endDate': widget.medecine.endDate,
-                          });
-                          MedicineDB.insertMedicine({
-                            'name': "doliprane",
-                            'form': "pill",
-                            'frequency': "3",
-                            'time': "5",
-                            'dosage': 4,
-                            'startDate':"1515",
-                            'endDate': "2020",
+                            /*'startDate': widget.medecine.startDate.toString(),
+                            'endDate': widget.medecine.endDate.toString()*/
                           });
                         },
                         style: ElevatedButton.styleFrom(

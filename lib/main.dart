@@ -47,7 +47,7 @@ class Dawini extends StatelessWidget {
               builder: (context) => MedecineInfo(index: args),
             );
           } 
-        } else if (settings.name == '/modify-medecine') {
+        } else if (settings.name == '/ModifyMedecine') {
           final args = settings.arguments;
           if (args is int?) { // Allowing for null as well
             return MaterialPageRoute(

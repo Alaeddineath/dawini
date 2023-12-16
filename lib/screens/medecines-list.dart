@@ -82,7 +82,7 @@ class _MedecinesListState extends State<MedecinesList> {
               height: 45 * fem,
             ),
           ),
-          Positioned(
+          Positioned(   //list 
             top: 234 * fem,
             left: 0,
             right: 0,
@@ -106,7 +106,7 @@ class _MedecinesListState extends State<MedecinesList> {
                       var med = medicines[index]; 
                       return GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/medicine-info', arguments: med['id']);
+                          Navigator.pushNamed(context, '/medecine-info', arguments: med['id']);
                         },
                         child: Card(
                           margin: EdgeInsets.fromLTRB(8 * fem, 6 * fem, 14 * fem, 7 * fem),
