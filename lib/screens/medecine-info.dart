@@ -1,3 +1,4 @@
+import 'package:dawini/screens/modify-medecine.dart';
 import 'package:flutter/material.dart';
 import 'package:dawini/databases/db.dart';
 
@@ -43,8 +44,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
     if (med != null && med!['id'] != null) {
       await MedicineDB.deleteMedicine(med!['id']);
       Navigator.popUntil(context, ModalRoute.withName('/home-page'));
-      Navigator.pushNamed( context,'/medicines-list');
-
+      Navigator.pushNamed(context, '/medicines-list');
     }
   }
 
@@ -65,16 +65,26 @@ class _MedecineInfoState extends State<MedecineInfo> {
       );
     }
 
-
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacementNamed(
+            context, '/medicines-list'); // Navigating to home page
+        return false; // Prevents the default back button behavior
+      },
+      child:Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Medecine Info',
-          style: TextStyle(color: Colors.black),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () =>
+                Navigator.pushReplacementNamed(context, '/medicines-list'),
+          ),
+          title: const Text(
+            'Medicine Information',
+            style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: Color(0xfffff2ff),
+          iconTheme: const IconThemeData(color: Color(0xfff43d4c)),
         ),
-        backgroundColor: Color(0xfffff2ff),
-        iconTheme: const IconThemeData(color: Color(0xfff43d4c)),
-      ),
       body: Stack(
         // our page components in columns
         children: [
@@ -203,12 +213,17 @@ class _MedecineInfoState extends State<MedecineInfo> {
                   subtitle: Text(
                     med?['frequency'],
                     style: TextStyle(
-                      fontSize: 20 * ffem, // Increase font size
+                      fontSize: 20 * ffem,
                     ),
                   ),
                   trailing: ElevatedButton(
-                  onPressed: () {
-                      Navigator.pushNamed(context, '/ModifyMedecine', arguments: med?['id']);
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/ModifyMedecine',
+                              arguments: med?['id'])
+                          .then((_) {
+                        fetchMedicineData();
+                        }
+                      );
                     },
                     child: Text(
                       'Change',
@@ -239,14 +254,16 @@ class _MedecineInfoState extends State<MedecineInfo> {
                   children: [
                     Container(
                       // clock picture
-                      margin: EdgeInsets.fromLTRB(60 * fem, 0 * fem, 10 * fem, 30 * fem),
+                      margin: EdgeInsets.fromLTRB(
+                          60 * fem, 0 * fem, 10 * fem, 30 * fem),
                       width: double.infinity,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                             // frameCMA (753:138)
-                            margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 65.33 * fem, 0 * fem),
+                            margin: EdgeInsets.fromLTRB(
+                                0 * fem, 0 * fem, 65.33 * fem, 0 * fem),
                             width: 72.35 * fem,
                             height: 72.34 * fem,
                             child: Image.asset(
@@ -258,7 +275,8 @@ class _MedecineInfoState extends State<MedecineInfo> {
                           Center(
                             // xdaysleft (753:137)
                             child: Container(
-                              margin: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 0.07 * fem),
+                              margin: EdgeInsets.fromLTRB(
+                                  0 * fem, 0 * fem, 0 * fem, 0.07 * fem),
                               child: Text(
                                 "${med?['duration']} Days Left",
                                 textAlign: TextAlign.center,
@@ -281,7 +299,8 @@ class _MedecineInfoState extends State<MedecineInfo> {
                   // delete button
                   onPressed: _deleteMedicine,
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero, // Use zero padding if you want the button to fill its parent
+                    padding: EdgeInsets
+                        .zero, // Use zero padding if you want the button to fill its parent
                     backgroundColor: Color(0xb7f43d4c), // Background color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20 * fem),
@@ -306,6 +325,6 @@ class _MedecineInfoState extends State<MedecineInfo> {
           ),
         ],
       ),
-    );
+    ),);
   }
 }

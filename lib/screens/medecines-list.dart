@@ -123,8 +123,12 @@ class _MedecinesListState extends State<MedecinesList> {
                         var med = medicines[index];
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/medecine-info',
-                                arguments: index);
+                             Navigator.pushNamed(context, '/medecine-info',
+                              arguments: index)
+                          .then((_) {
+                        MedicineDB.getAllMedicines();
+                        }
+                      );
                           },
                           child: Card(
                             margin: EdgeInsets.fromLTRB(

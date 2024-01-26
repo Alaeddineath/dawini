@@ -12,9 +12,10 @@ class ModifyMedecine extends StatefulWidget {
 
 class _ModifyMedecineState extends State<ModifyMedecine> {
   late TextEditingController frequencyController;
-  String medName = 'Medicine Name'; 
-  int frequency = 0; 
-  List<TimeOfDay> selectedTimes = List.generate(12, (index) => TimeOfDay(hour: 0, minute: 0));
+  String medName = 'Medicine Name';
+  int frequency = 0;
+  List<TimeOfDay> selectedTimes =
+      List.generate(10, (index) => TimeOfDay(hour: 0, minute: 0));
 
   @override
   void initState() {
@@ -31,16 +32,12 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
   void fetchMedicineData() async {
     if (widget.id != null) {
       final db = await DBHelper.getDatabase();
-      final List<Map<String, dynamic>> result = await db.query(
-        'Medicine', 
-        where: 'id = ?', 
-        whereArgs: [widget.id]
-      );
-      
+      final List<Map<String, dynamic>> result =
+          await db.query('Medicine', where: 'id = ?', whereArgs: [widget.id]);
+
       if (result.isNotEmpty) {
         setState(() {
           medName = result.first['name'];
-          // Set other medicine details if needed
         });
       }
     }
@@ -57,7 +54,6 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-
 
     return Scaffold(
       appBar: AppBar(
@@ -126,7 +122,8 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
             left: 0,
             right: 0,
             bottom: 0,
-            child: ListView( // Wrap the content in a ListView
+            child: ListView(
+              // Wrap the content in a ListView
               children: [
                 ListTile(
                   title: Text(
@@ -142,7 +139,8 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
                   trailing: ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        frequency = (frequency + 1) % 13; // Increment by 1, capped at 12
+                        frequency = (frequency + 1) %
+                            10; // Increment by 1, capped at 12
                       });
                     },
                     child: Text(
@@ -155,7 +153,8 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20 * fem),
                       ),
@@ -197,9 +196,14 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
                 Divider(),
                 SizedBox(height: 20 * fem), // Gives some spacing at the bottom
                 ElevatedButton(
-                onPressed: () async {
+                  onPressed: () async {
                     // Convert selectedTimes to a string format
-                    String times = selectedTimes.map((time) => time.format(context)).join(',');
+                    String times = selectedTimes
+                        .where((time) => !(time.hour == 0 &&
+                            time.minute == 0))
+                        .map((time) =>
+                            time.format(context))
+                        .join(','); // Join them with a comma
                     // Update the medicine in the database
                     await MedicineDB.updateMedicine(widget.id!, {
                       'name': medName,
@@ -207,27 +211,28 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
                       'time': times,
                     });
                     Navigator.pop(context);
-                 },
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  backgroundColor: Color(0xb7f43d4c),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20 * fem),
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    backgroundColor: Color(0xb7f43d4c),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20 * fem),
+                    ),
+                    shadowColor: Color(0x3f000000),
+                    elevation: 2 * fem,
+                    fixedSize:
+                        Size(20 * fem, 40 * fem), // Adjust the width here
                   ),
-                  shadowColor: Color(0x3f000000),
-                  elevation: 2 * fem,
-                  fixedSize: Size(20 * fem, 40 * fem), // Adjust the width here
-                ),
-                child: Text(
-                  'SAVE',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20 * ffem,
-                    fontWeight: FontWeight.w400,
-                    color: Color(0xfffffefe),
+                  child: Text(
+                    'SAVE',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20 * ffem,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xfffffefe),
+                    ),
                   ),
                 ),
-              ),
                 SizedBox(height: 20 * fem), // Gives some spacing at the bottom
               ],
             ),
@@ -235,5 +240,5 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
         ],
       ),
     );
-    }
+  }
 }
