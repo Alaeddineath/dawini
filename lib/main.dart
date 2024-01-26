@@ -1,6 +1,7 @@
 import 'package:dawini/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:dawini/screens/home-page.dart';
+import 'package:dawini/screens/loading-screen.dart';
 import 'package:dawini/screens/add-form.dart';
 import 'package:dawini/screens/add-frequency.dart';
 import 'package:dawini/screens/add-name-.dart';
@@ -26,8 +27,9 @@ class Dawini extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/home-page',
+      initialRoute: '/loading-screen',
       routes: {
+        '/loading-screen': (context) => const LoadingScreen(),
         '/add-form': (context) => AddForm(medecine: Medecine()),
         '/add-frequency': (context) => AddFrequency(medecine: Medecine()),
         '/add-name': (context) => AddName(medecine: Medecine()),
