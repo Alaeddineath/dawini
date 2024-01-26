@@ -5,7 +5,7 @@ class LoadingScreen extends StatelessWidget {
   const LoadingScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacementNamed(context, '/home-page');
     });
 
