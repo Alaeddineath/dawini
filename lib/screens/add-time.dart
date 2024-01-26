@@ -200,7 +200,7 @@ class AddTimeState extends State<AddTime> {
                   widthFactor: 0.8,
                   child: ElevatedButton(
                     onPressed: () {
-                      widget.medecine.time = selectedTime.toString();
+                      widget.medecine.time = selectedTime.hour.toString()+':'+selectedTime.minute.toString();
                       print("time: ${widget.medecine.time}\n");
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>

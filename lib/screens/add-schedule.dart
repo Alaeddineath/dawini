@@ -299,6 +299,8 @@ class _AddScheduleState extends State<AddSchedule> {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
+                          widget.medecine.startDate = _startDate!;
+                          widget.medecine.endDate = _lastDate!;
                           print("Navigating to Medicines List");
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
@@ -316,8 +318,8 @@ class _AddScheduleState extends State<AddSchedule> {
                             'frequency': widget.medecine.frequency,
                             'time': widget.medecine.time.toString(),
                             'dosage': widget.medecine.dosage,
-                            /*'startDate': widget.medecine.startDate.toString(),
-                            'endDate': widget.medecine.endDate.toString()*/
+                            'startDate': widget.medecine.startDate.toString(),
+                            'endDate': widget.medecine.endDate.toString()
                           });
                         },
                         style: ElevatedButton.styleFrom(

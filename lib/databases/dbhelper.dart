@@ -20,7 +20,8 @@ static Future<Database> getDatabase() async {
           time TEXT,
           dosage INTEGER,
           startDate TEXT,
-          endDate TEXT
+          endDate TEXT,
+          duration INTEGER
         )
       ''');
     },
