@@ -94,11 +94,11 @@ class _MedecinesListState extends State<MedecinesList> {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (snapshot.hasData) {
                   List<Map<String, dynamic>> medicines = snapshot.data!; // Assign the data to 'medicines'
-                  /*if (medicines.isEmpty) {
+                  if (medicines.isEmpty) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {
                       Navigator.of(context).pushReplacementNamed('/empty-medecines-list');
                     });
-                  }*/
+                  }
                   return ListView.builder(
                     padding: EdgeInsets.zero,
                     itemCount: medicines.length, 
@@ -106,7 +106,7 @@ class _MedecinesListState extends State<MedecinesList> {
                       var med = medicines[index]; 
                       return GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/medecine-info', arguments: med['id']);
+                          Navigator.pushNamed(context, '/medecine-info', arguments: index);
                         },
                         child: Card(
                           margin: EdgeInsets.fromLTRB(8 * fem, 6 * fem, 14 * fem, 7 * fem),
@@ -139,7 +139,7 @@ class _MedecinesListState extends State<MedecinesList> {
                                       ),
                                       SizedBox(height: 4 * fem),
                                       Text(
-                                        '${med['frequency']} \n${med['time']}', // Accessing directly from the map
+                                        'Frequency: ${med['frequency']} \nTime: ${med['time']}', // Accessing directly from the map
                                         style: TextStyle(
                                           fontSize: 16 * ffem,
                                           color: Color(0xff35134f),

@@ -192,8 +192,9 @@ class _SpecifyScheduleState extends State<SpecifySchedule> {
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  AddTime(medecine: widget.medecine)));
+                                    builder: (context) => AddTime(
+                                        medecine: widget.medecine,
+                                        frequency: widget.medecine.frequency)));
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Color(0xb7f43d4c),

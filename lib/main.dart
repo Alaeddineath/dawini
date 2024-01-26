@@ -32,7 +32,7 @@ class Dawini extends StatelessWidget {
         '/add-frequency': (context) => AddFrequency(medecine: Medecine()),
         '/add-name': (context) => AddName(medecine: Medecine()),
         '/add-schedule': (context) => AddSchedule(medecine: Medecine()),
-        '/add-time': (context) => AddTime(medecine: Medecine()),
+        '/add-time': (context) => AddTime(medecine: Medecine(), frequency: ''),
         '/empty-medecines-list': (context) => EmptyMedecinesList(),
         '/home-page': (context) => HomePage(),
         '/medicines-list': (context) => MedecinesList(medecine: Medecine()),
@@ -46,10 +46,11 @@ class Dawini extends StatelessWidget {
             return MaterialPageRoute(
               builder: (context) => MedecineInfo(index: args),
             );
-          } 
+          }
         } else if (settings.name == '/ModifyMedecine') {
           final args = settings.arguments;
-          if (args is int?) { // Allowing for null as well
+          if (args is int?) {
+            // Allowing for null as well
             return MaterialPageRoute(
               builder: (context) => ModifyMedecine(id: args),
             );

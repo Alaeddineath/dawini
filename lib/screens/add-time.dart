@@ -4,7 +4,8 @@ import '../medecine.dart';
 
 class AddTime extends StatefulWidget {
   final Medecine medecine;
-  AddTime({required this.medecine});
+  final String frequency; // New property to store the selected frequency
+  AddTime({required this.medecine, required this.frequency});
   @override
   AddTimeState createState() => AddTimeState();
 }
@@ -17,6 +18,18 @@ class AddTimeState extends State<AddTime> {
     double baseWidth = 360;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+
+    int numberOfTimeBoxes = 1; // Default to 1
+
+    // Determine the number of time boxes based on the selected frequency
+    if (widget.frequency == '2') {
+      numberOfTimeBoxes = 2;
+    } else if (widget.frequency == '3') {
+      numberOfTimeBoxes = 3;
+    } else if (widget.frequency == '4') {
+      numberOfTimeBoxes = 4;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -31,7 +44,6 @@ class AddTimeState extends State<AddTime> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              // autogrouptypgXmn (H8xz1JcdEVWZDwJRB8Typg)
               padding: EdgeInsets.fromLTRB(
                   25.69 * fem, 26.43 * fem, 51 * fem, 13 * fem),
               width: double.infinity,
@@ -39,14 +51,12 @@ class AddTimeState extends State<AddTime> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    // arrowsarrowleftStk (14:174)
                     margin: EdgeInsets.fromLTRB(
                         0 * fem, 0 * fem, 0 * fem, 16.43 * fem),
                     width: 19.18 * fem,
                     height: 18.14 * fem,
                   ),
                   Container(
-                    // autogroupgsktXQQ (H8xxc1ckGd4J8zhzA5GSkt)
                     margin: EdgeInsets.fromLTRB(
                         0 * fem, 0 * fem, 182.69 * fem, 8 * fem),
                     padding: EdgeInsets.fromLTRB(
@@ -56,7 +66,6 @@ class AddTimeState extends State<AddTime> {
                       borderRadius: BorderRadius.circular(39 * fem),
                     ),
                     child: Center(
-                      // group24Qj6 (65:93)
                       child: SizedBox(
                         width: 50 * fem,
                         height: 50 * fem,
@@ -69,7 +78,6 @@ class AddTimeState extends State<AddTime> {
                     ),
                   ),
                   Container(
-                    // whendoyouneedtotakethedosesijn (14:172)
                     margin: EdgeInsets.fromLTRB(
                         9.31 * fem, 0 * fem, 0 * fem, 0 * fem),
                     constraints: BoxConstraints(
@@ -89,7 +97,6 @@ class AddTimeState extends State<AddTime> {
               ),
             ),
             Container(
-              // autogrouppyvvC9A (H8xxibG7gsfE1cPG64PyVv)
               padding:
                   EdgeInsets.fromLTRB(39 * fem, 57 * fem, 27 * fem, 70 * fem),
               width: double.infinity,
@@ -102,10 +109,10 @@ class AddTimeState extends State<AddTime> {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Card(
+                children: List.generate(
+                  numberOfTimeBoxes,
+                  (index) => Card(
                     child: Container(
-                      // timeinputHwJ (52:281)
                       margin: EdgeInsets.fromLTRB(
                           0 * fem, 0 * fem, 12 * fem, 0 * fem),
                       height: 140 * fem,
@@ -126,7 +133,6 @@ class AddTimeState extends State<AddTime> {
                               }
                             },
                             child: Container(
-                              // timeselectorBmn (52:282)
                               margin: EdgeInsets.fromLTRB(
                                   25 * fem, 0 * fem, 5.5 * fem, 0 * fem),
                               width: 200 * fem,
@@ -135,7 +141,6 @@ class AddTimeState extends State<AddTime> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    // inputfield7QY (I52:282;23:2067)
                                     margin: EdgeInsets.fromLTRB(
                                         0 * fem, 0 * fem, 0 * fem, 7 * fem),
                                     padding: EdgeInsets.fromLTRB(
@@ -152,9 +157,7 @@ class AddTimeState extends State<AddTime> {
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
                                           vertical: 20 * fem,
-                                          horizontal: 15 *
-                                              fem), // Adjust the padding as needed
-
+                                          horizontal: 15 * fem),
                                       child: Text(
                                         '${selectedTime.hour}:${selectedTime.minute}',
                                         textAlign: TextAlign.center,
@@ -169,7 +172,6 @@ class AddTimeState extends State<AddTime> {
                                     ),
                                   ),
                                   Text(
-                                    // labelAdi (I52:282;23:2068)
                                     'Time',
                                     style: TextStyle(
                                       fontSize: 12 * ffem,
@@ -187,48 +189,47 @@ class AddTimeState extends State<AddTime> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 100.0),
+                child: FractionallySizedBox(
+                  widthFactor: 0.8,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      widget.medecine.time = selectedTime.toString();
+                      print("time: ${widget.medecine.time}\n");
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              AddSchedule(medecine: widget.medecine)));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xb7f43d4c),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20 * fem),
+                      ),
+                    ),
                     child: Padding(
-                      padding: EdgeInsets.only(
-                          bottom: 100.0), // Adjust the bottom padding as needed
-                      child: FractionallySizedBox(
-                        widthFactor: 0.8,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            widget.medecine.time = selectedTime.toString();
-                            print("time: ${widget.medecine.time}\n");
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    AddSchedule(medecine: widget.medecine)));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xb7f43d4c),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20 * fem),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10 * fem,
-                              horizontal: 20 * fem,
-                            ),
-                            child: Text(
-                              'Next',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 20 * ffem,
-                                fontWeight: FontWeight.w400,
-                                height: 1.245 * ffem / fem,
-                                color: Color(0xffffffff),
-                              ),
-                            ),
-                          ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10 * fem,
+                        horizontal: 20 * fem,
+                      ),
+                      child: Text(
+                        'Next',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20 * ffem,
+                          fontWeight: FontWeight.w400,
+                          height: 1.245 * ffem / fem,
+                          color: Color(0xffffffff),
                         ),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ],

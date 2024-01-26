@@ -61,7 +61,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
           backgroundColor: Color(0xfffff2ff),
           iconTheme: const IconThemeData(color: Color(0xfff43d4c)),
         ),
-        body: Center(child: CircularProgressIndicator()),
+        body: Center(child:Text('${widget.index}')),
       );
     }
 
