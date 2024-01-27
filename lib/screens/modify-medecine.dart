@@ -1,6 +1,8 @@
+import 'package:dawini/localnotification.dart';
 import 'package:flutter/material.dart';
 import 'package:dawini/databases/dbhelper.dart';
 import 'package:dawini/databases/db.dart';
+import 'package:intl/intl.dart';
 
 class ModifyMedecine extends StatefulWidget {
   final int? id;
@@ -199,17 +201,79 @@ class _ModifyMedecineState extends State<ModifyMedecine> {
                   onPressed: () async {
                     // Convert selectedTimes to a string format
                     String times = selectedTimes
-                        .where((time) => !(time.hour == 0 &&
-                            time.minute == 0))
-                        .map((time) =>
-                            time.format(context))
+                        .where((time) => !(time.hour == 0 && time.minute == 0))
+                        .map((time) => time.format(context))
                         .join(','); // Join them with a comma
+
                     // Update the medicine in the database
                     await MedicineDB.updateMedicine(widget.id!, {
                       'name': medName,
                       'frequency': frequency.toString(),
                       'time': times,
                     });
+
+                    // Fetch medicine data from the database
+                    final db = await DBHelper.getDatabase();
+                    final List<Map<String, dynamic>> result = await db.query(
+                        'Medicine',
+                        where: 'id = ?',
+                        whereArgs: [widget.id]);
+
+                    if (result.isNotEmpty) {
+DateTime startDate = DateTime.parse(result.first['startDate']);
+DateTime endDate = DateTime.parse(result.first['endDate']);
+
+                      // Schedule custom notifications here
+                      final format = DateFormat("HH:mm");
+                      final List<String> medicineTimes =
+                          times.split(','); // Split times by comma
+                      final DateTime now = DateTime.now();
+
+                      // Calculate the duration in days between startDate and endDate
+                      final int daysDifference =
+                          endDate.difference(startDate).inDays +
+                              1; // Add 1 to include the end date
+
+                      int uniqueId = 0; // Initialize a unique ID counter
+
+                      // Schedule notifications for each medicine time for each day
+                      for (String medicineTimeStr in medicineTimes) {
+                        final TimeOfDay medicineTime = TimeOfDay.fromDateTime(
+                            format.parse(medicineTimeStr.trim()));
+
+                        for (int i = 0; i <= daysDifference; i++) {
+                          final DateTime scheduledNotificationDateTime =
+                              DateTime(
+                            startDate.year,
+                            startDate.month,
+                            startDate.day,
+                            medicineTime.hour,
+                            medicineTime.minute,
+                          ).add(Duration(days: i));
+
+                          // Check if the scheduledNotificationDateTime is in the past and skip if it is
+                          if (scheduledNotificationDateTime.isBefore(now))
+                            continue;
+
+                          // Generate a unique ID based on both time and day
+                          final int notificationId = uniqueId++;
+
+                          // Call the notification service to schedule the notification
+                          NotificationService.showScheduleNotification(
+                            id: notificationId,
+                            title: "Medicine Reminder",
+                            body:
+                                "Time to take : $medName", // Use the updated medicine name
+                            scheduledTime: scheduledNotificationDateTime,
+                            payload: "Payload data or medicine details",
+                          );
+
+                          print(
+                              "Scheduled Notification DateTime: $scheduledNotificationDateTime , $notificationId");
+                        }
+                      }
+                    }
+
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
