@@ -275,7 +275,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
                                 margin: EdgeInsets.fromLTRB(
                                     0 * fem, 0 * fem, 0 * fem, 0.07 * fem),
                                 child: Text(
-                                  "${med?['duration']} Days Left",
+                                  "${DateTime.parse(med?['endDate']).difference(DateTime.now()).inDays} Days Left",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 15 * ffem,
