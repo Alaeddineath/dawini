@@ -9,12 +9,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Medecine medecine;
+  late Medecine medecine =
+      Medecine(name: '', form: '', frequency: '', time: '', dosage: 0);
+  final notificationService = NotificationService();
 
   @override
   void initState() {
     super.initState();
-    medecine = Medecine(name: '', form: '', frequency: '', time: '', dosage: 0);
   }
 
   @override
@@ -149,12 +150,14 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   setState(() {
                     Navigator.pushNamed(context, '/medicines-list');
-                    NotificationService().showNotification(
-                    title: 'Initial Notification Title',
-                    body: 'Initial Notification Body',
-                  );
+                    NotificationService().scheduleNotification(
+                      id: 1,
+                      title: "Scheduled Notification",
+                      body: "This is a scheduled notification.",
+                      scheduledNotificationDateTime: DateTime.now().add(
+                        Duration(seconds: 7)),
+                    );
                   });
-                  //}
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),

@@ -15,12 +15,10 @@ import 'package:dawini/localnotification.dart';
 import 'medecine.dart'; // THIS IS GOTTA GET DELETED LATER
 
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); // Ensure plugin services are initialized
-  await NotificationService()
-      .initNotification(); // Initialize the notification service
-  //tz.initializeTimeZones(); // Initialize timezone data
-  runApp(const Dawini());
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationService service = NotificationService();
+  await service.initNotification();
+  runApp(Dawini());
 }
 
 class Dawini extends StatelessWidget {

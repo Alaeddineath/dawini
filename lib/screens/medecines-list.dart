@@ -172,13 +172,13 @@ class _MedecinesListState extends State<MedecinesList> {
                                       ],
                                     ),
                                   ),
-                                  /*Text(
+                                  Text(
                                   "${DateTime.parse(med['endDate']).difference(DateTime.now()).inDays} Days Left",
                                   style: TextStyle(
                                     fontSize: 16 * ffem,
                                     color: Color(0xff999999),
                                   ),
-                                ),*/
+                                ),
                                 ],
                               ),
                             ),
