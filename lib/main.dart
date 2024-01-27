@@ -11,9 +11,17 @@ import 'package:dawini/screens/medecines-list.dart';
 import 'package:dawini/screens/empty-medecines-list.dart';
 import 'package:dawini/screens/medecine-info.dart';
 import 'package:dawini/screens/modify-medecine.dart';
+import 'package:dawini/localnotification.dart';
 import 'medecine.dart'; // THIS IS GOTTA GET DELETED LATER
 
-void main() => runApp(const Dawini());
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensure plugin services are initialized
+  await NotificationService()
+      .initNotification(); // Initialize the notification service
+  //tz.initializeTimeZones(); // Initialize timezone data
+  runApp(const Dawini());
+}
 
 class Dawini extends StatelessWidget {
   const Dawini({super.key});

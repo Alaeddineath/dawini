@@ -1,5 +1,6 @@
 import 'package:dawini/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:dawini/localnotification.dart';
 import '../medecine.dart';
 
 class HomePage extends StatefulWidget {
@@ -120,7 +121,8 @@ class _HomePageState extends State<HomePage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/add-name',arguments: medecine);
+                  Navigator.pushNamed(context, '/add-name',
+                      arguments: medecine);
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -145,15 +147,15 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                // Check if the medecineList is empty
-                /*if (medecineList.isEmpty) {
-                  // If the list is empty, navigate to the 'empty-medecines-list' page
-                  Navigator.pushNamed(context, '/empty-medecines-list');
-                } else {*/
-                  // If the list is not empty, navigate to the 'medecines-list' page
-                  Navigator.pushNamed(context, '/medicines-list');
-                //}
-              },
+                  setState(() {
+                    Navigator.pushNamed(context, '/medicines-list');
+                    NotificationService().showNotification(
+                    title: 'Initial Notification Title',
+                    body: 'Initial Notification Body',
+                  );
+                  });
+                  //}
+                },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                   backgroundColor: Color(0xfffefefe),
