@@ -212,7 +212,7 @@ class AddTimeState extends State<AddTime> {
                               '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}')
                           .toList();
                       String concatenatedTimes = formattedTimes.join(
-                          ', '); // Join the formatted times into a single string
+                          ','); // Join the formatted times into a single string
                       widget.medecine.time = concatenatedTimes;
                       print("time: ${widget.medecine.time}\n");
                       Navigator.of(context).push(MaterialPageRoute(

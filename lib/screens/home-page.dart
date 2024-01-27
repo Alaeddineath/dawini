@@ -150,13 +150,6 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   setState(() {
                     Navigator.pushNamed(context, '/medicines-list');
-                    NotificationService().scheduleNotification(
-                      id: 1,
-                      title: "Scheduled Notification",
-                      body: "This is a scheduled notification.",
-                      scheduledNotificationDateTime: DateTime.now().add(
-                        Duration(seconds: 7)),
-                    );
                   });
                 },
                 style: ElevatedButton.styleFrom(

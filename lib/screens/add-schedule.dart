@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../databases/db.dart';
 import '../medecine.dart';
+import 'package:intl/intl.dart';
+import 'package:timezone/timezone.dart' as tz;
+import 'package:dawini/localnotification.dart';
 
 class AddSchedule extends StatefulWidget {
   @override
@@ -301,17 +304,72 @@ class _AddScheduleState extends State<AddSchedule> {
                         onPressed: () {
                           widget.medecine.startDate = _startDate!;
                           widget.medecine.endDate = _lastDate!;
+
+                          ////////////////notification process///////////
+                            final format = DateFormat("HH:mm");
+                            final List<String> medicineTimes = widget
+                                .medecine.time
+                                .split(','); // Split times by comma
+                            final DateTime now = DateTime.now();
+
+                            // Calculate the duration in days between startDate and endDate
+                            final int daysDifference = widget.medecine.endDate
+                                .difference(widget.medecine.startDate)
+                                .inDays;
+
+                            int uniqueId = 0; // Initialize a unique ID counter
+
+                            // Schedule notifications for each medicine time for each day
+                            for (String medicineTimeStr in medicineTimes) {
+                              final TimeOfDay medicineTime =
+                                  TimeOfDay.fromDateTime(format.parse(
+                                      medicineTimeStr
+                                          .trim())); // Trim extra spaces
+
+                              for (int i = 0; i <= daysDifference; i++) {
+                                final DateTime scheduledNotificationDateTime =
+                                    DateTime(
+                                  widget.medecine.startDate.year,
+                                  widget.medecine.startDate.month,
+                                  widget.medecine.startDate.day,
+                                  medicineTime.hour,
+                                  medicineTime.minute,
+                                ).add(Duration(days: i));
+
+                                // Check if the scheduledNotificationDateTime is in the past and skip if it is
+                                if (scheduledNotificationDateTime.isBefore(now))
+                                  continue;
+                                
+                                // Generate a unique ID based on both time and day
+                                final int notificationId = uniqueId++;
+                                // Call the notification service to schedule the notification
+                                NotificationService.showScheduleNotification(
+                                  id: notificationId,
+                                  title: "Medicine Reminder",
+                                  body:
+                                      "Time to take : ${widget.medecine.name}",
+                                  scheduledTime: scheduledNotificationDateTime,
+                                  payload: "Payload data or medicine details",
+                                );
+
+                                print(
+                               "Scheduled Notification DateTime: $scheduledNotificationDateTime , $notificationId");
+                               
+                              }
+                            }
+
+                            ////////////////////////////
                           print("Navigating to Medicines List");
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) =>
                                   MedecinesList(medecine: widget.medecine)));
-                          print("name: ${widget.medecine.name}\n");
+                          /*print("name: ${widget.medecine.name}\n");
                           print("form: ${widget.medecine.form}\n");
                           print("frequency: ${widget.medecine.frequency}\n");
                           print("time: ${widget.medecine.time}\n");
                           print("dosage: ${widget.medecine.dosage}\n");
                           print("star: ${widget.medecine.startDate}\n");
-                          print("end: ${widget.medecine.endDate}\n");
+                          print("end: ${widget.medecine.endDate}\n");*/
                           MedicineDB.insertMedicine({
                             'name': widget.medecine.name,
                             'form': widget.medecine.form,

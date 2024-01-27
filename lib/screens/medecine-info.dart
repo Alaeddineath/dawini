@@ -30,15 +30,12 @@ class _MedecineInfoState extends State<MedecineInfo> {
   }
 
   void _addDay() async {
-    if (med != null && med!['id'] != null) {
-      await MedicineDB.addDay(med!['id']);
-      int currentDuration = med!['duration'];
-      int newDuration = currentDuration + 1;
-      setState(() {
-        med!['duration'] = newDuration;
-      });
-    }
+  if (med != null && med!['id'] != null) {
+    await MedicineDB.addDay(med!['id']);
+    fetchMedicineData(); // Update the med variable
+    setState(() {}); // Trigger a rebuild
   }
+}
 
   void _deleteMedicine() async {
     if (med != null && med!['id'] != null) {
@@ -175,7 +172,7 @@ class _MedecineInfoState extends State<MedecineInfo> {
                       style: TextStyle(fontSize: 20),
                     ),
                     subtitle: Text(
-                      "${med?['duration']} Days ",
+                      "${DateTime.parse(med?['endDate']).difference(DateTime.now()).inDays} Days ",
                       style: TextStyle(
                         fontSize: 20 * ffem, // Increase font size
                       ),
