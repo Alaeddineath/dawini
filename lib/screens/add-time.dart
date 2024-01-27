@@ -12,7 +12,8 @@ class AddTime extends StatefulWidget {
 
 class AddTimeState extends State<AddTime> {
   // Use a List to store the selected times for each time box
-  List<TimeOfDay> selectedTimes = List.generate(4, (index) => TimeOfDay.now());
+  List<TimeOfDay> selectedTimes =
+      List.generate(4, (index) => TimeOfDay(hour: 0, minute: 0));
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +163,7 @@ class AddTimeState extends State<AddTime> {
                                         horizontal: 15 * fem,
                                       ),
                                       child: Text(
-                                        '${selectedTimes[index].hour}:${selectedTimes[index].minute}',
+                                        '${selectedTimes[index].hour.toString().padLeft(2, '0')}:${selectedTimes[index].minute.toString().padLeft(2, '0')}',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 35 * ffem,
@@ -205,7 +206,10 @@ class AddTimeState extends State<AddTime> {
                     onPressed: () {
                       // Use a custom function to format TimeOfDay
                       List<String> formattedTimes = selectedTimes
-                          .map((time) => '${time.hour}:${time.minute}')
+                          .where((time) => !(time.hour == 0 &&
+                              time.minute == 0))
+                          .map((time) =>
+                              '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}')
                           .toList();
                       String concatenatedTimes = formattedTimes.join(
                           ', '); // Join the formatted times into a single string
