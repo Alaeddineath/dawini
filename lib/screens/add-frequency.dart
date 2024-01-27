@@ -220,7 +220,7 @@ class _AddFrequencyState extends State<AddFrequency> {
                     SizedBox(height: 30 * fem),
                     ElevatedButton(
                       onPressed: () =>
-                          _navigateToAddTime('Only_as_needed'),
+                          _navigateToAddTime('only as needed'),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 20),

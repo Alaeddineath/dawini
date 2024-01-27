@@ -11,7 +11,8 @@ class AddTime extends StatefulWidget {
 }
 
 class AddTimeState extends State<AddTime> {
-  TimeOfDay selectedTime = TimeOfDay.now();
+  // Use a List to store the selected times for each time box
+  List<TimeOfDay> selectedTimes = List.generate(4, (index) => TimeOfDay.now());
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +85,7 @@ class AddTimeState extends State<AddTime> {
                       maxWidth: 274 * fem,
                     ),
                     child: Text(
-                      'When do you need to take the  doses?',
+                      'When do you need to take the doses?',
                       style: TextStyle(
                         fontSize: 23 * ffem,
                         fontWeight: FontWeight.w700,
@@ -123,12 +124,13 @@ class AddTimeState extends State<AddTime> {
                             onTap: () async {
                               TimeOfDay? pickedTime = await showTimePicker(
                                 context: context,
-                                initialTime: selectedTime,
+                                initialTime: selectedTimes[index],
                               );
 
                               if (pickedTime != null) {
                                 setState(() {
-                                  selectedTime = pickedTime;
+                                  // Update the selected time for the specific time box
+                                  selectedTimes[index] = pickedTime;
                                 });
                               }
                             },
@@ -156,10 +158,11 @@ class AddTimeState extends State<AddTime> {
                                     ),
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
-                                          vertical: 20 * fem,
-                                          horizontal: 15 * fem),
+                                        vertical: 20 * fem,
+                                        horizontal: 15 * fem,
+                                      ),
                                       child: Text(
-                                        '${selectedTime.hour}:${selectedTime.minute}',
+                                        '${selectedTimes[index].hour}:${selectedTimes[index].minute}',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontSize: 35 * ffem,
@@ -200,11 +203,18 @@ class AddTimeState extends State<AddTime> {
                   widthFactor: 0.8,
                   child: ElevatedButton(
                     onPressed: () {
-                      widget.medecine.time = selectedTime.hour.toString()+':'+selectedTime.minute.toString();
+                      // Use a custom function to format TimeOfDay
+                      List<String> formattedTimes = selectedTimes
+                          .map((time) => '${time.hour}:${time.minute}')
+                          .toList();
+                      String concatenatedTimes = formattedTimes.join(
+                          ', '); // Join the formatted times into a single string
+                      widget.medecine.time = concatenatedTimes;
                       print("time: ${widget.medecine.time}\n");
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              AddSchedule(medecine: widget.medecine)));
+                        builder: (context) =>
+                            AddSchedule(medecine: widget.medecine),
+                      ));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xb7f43d4c),

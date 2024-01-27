@@ -25,17 +25,9 @@ class Medecine {
   int getDuration() {
     return endDate.difference(startDate).inDays;
   }
-
-  Map toMap() {
-    return {
-      'name': this.name,
-    };
-  }
-
   void addDay() {
     endDate = endDate.add(Duration(days: 1));
   }
-
   // Function to calculate the number of days left
   int getDaysLeft() {
     final now = DateTime.now();
